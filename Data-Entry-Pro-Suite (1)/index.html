@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Data Entry Pro Suite</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <main id="app">
+    <section id="welcome" class="card centered">
+      <h1>Data Entry Pro Suite</h1>
+      <p class="subtitle">Created by Jane Emmanuel</p>
+      <input id="businessName" placeholder="Enter your name or business name" />
+      <button id="enterBtn" class="btn primary">Enter Dashboard</button>
+    </section>
+
+    <section id="dashboard" class="hidden">
+      <header class="topbar">
+        <div class="greeting">👋 Welcome, <span id="bizLabel"></span>!</div>
+        <button id="logoutBtn" class="btn ghost">Logout</button>
+      </header>
+      <div class="cards" id="cardsContainer"></div>
+      <section id="moduleArea" class="module-area"></section>
+      <footer class="footer">Created by Jane Emmanuel</footer>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

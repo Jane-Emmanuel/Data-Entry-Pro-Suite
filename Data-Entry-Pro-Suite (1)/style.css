@@ -1,0 +1,54 @@
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #ffffff;
+  color: #333;
+}
+.card.centered {
+  max-width: 400px;
+  margin: 80px auto;
+  text-align: center;
+}
+.btn.primary {
+  background: #ec4899;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.btn.ghost {
+  border: 1px solid #ec4899;
+  background: transparent;
+  color: #ec4899;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.hidden { display: none; }
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  padding: 20px;
+  gap: 16px;
+}
+.cards div {
+  border: 1px solid #f5c2da;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  background: #fff;
+  transition: 0.2s;
+}
+.cards div:hover { border-color: #ec4899; }
+.module-area {
+  padding: 20px;
+}
+.footer {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 14px;
+  padding: 20px;
+  color: #888;
+}
