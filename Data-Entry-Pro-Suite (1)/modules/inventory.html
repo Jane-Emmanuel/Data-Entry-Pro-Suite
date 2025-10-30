@@ -1,1 +1,47 @@
-<h2>Inventory</h2><p>Module layout will be completed next.</p>
+<div class="module-section pastel-card">
+
+  <h2 class="module-title">Inventory Manager</h2>
+
+  <form id="inventoryForm" class="form card-box">
+    <div class="form-group">
+      <label>Item Name</label>
+      <input type="text" id="invName" placeholder="e.g. Rice, Notebook" required />
+    </div>
+
+    <div class="form-group">
+      <label>Quantity</label>
+      <input type="number" id="invQty" required />
+    </div>
+
+    <div class="form-group">
+      <label>Unit Price</label>
+      <input type="number" id="invPrice" required />
+    </div>
+
+    <div class="form-group">
+      <label>Notes (Optional)</label>
+      <input type="text" id="invNotes" placeholder="Optional" />
+    </div>
+
+    <button type="submit" class="btn primary full">Add Item</button>
+  </form>
+
+  <h3 class="table-title">Inventory Records</h3>
+
+  <div class="table-wrapper">
+    <table id="inventoryTable" class="styled-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Qty</th>
+          <th>Unit Price</th>
+          <th>Total Value</th>
+          <th>Notes</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+</div>

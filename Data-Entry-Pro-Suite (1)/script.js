@@ -29,6 +29,9 @@ function loadDashboard() {
 function loadModule(path) {
   fetch(path).then(r => r.text()).then(html => {
     moduleArea.innerHTML = html;
+
+    // ✅ When Expense Module loads, initialize it:
+    if (path === "modules/expense.html") initExpenseTracker();
   });
 }
 
@@ -55,3 +58,112 @@ if(saved){
   dashboard.classList.remove("hidden");
   loadDashboard();
 }
+
+
+
+/* ----------------------------------------------------
+   ✅ EXPENSE TRACKER MODULE LOGIC
+-----------------------------------------------------*/
+function initExpenseTracker() {
+  let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
+
+  function renderExpenses() {
+    const tableBody = document.querySelector("#expenseTable tbody");
+    if (!tableBody) return;
+    tableBody.innerHTML = "";
+
+    expenses.forEach((exp, index) => {
+      tableBody.innerHTML += `
+        <tr>
+          <td>${exp.date}</td>
+          <td>${exp.category}</td>
+          <td>${exp.amount}</td>
+          <td>${exp.notes}</td>
+          <td><button class="delete-btn" data-index="${index}">X</button></td>
+        </tr>
+      `;
+    });
+
+    localStorage.setItem("expenses", JSON.stringify(expenses));
+
+    document.querySelectorAll(".delete-btn").forEach(btn => {
+      btn.onclick = () => {
+        expenses.splice(btn.dataset.index, 1);
+        renderExpenses();
+      };
+    });
+  }
+
+  const form = document.querySelector("#expenseForm");
+  if (form) {
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const expense = {
+        date: document.querySelector("#expenseDate").value,
+        category: document.querySelector("#expenseCategory").value,
+        amount: document.querySelector("#expenseAmount").value,
+        notes: document.querySelector("#expenseNotes").value || ""
+      };
+
+      expenses.push(expense);
+      renderExpenses();
+      form.reset();
+    });
+  }
+
+  renderExpenses();
+}
+/* =============================
+   INVENTORY MANAGER
+============================= */
+
+let inventory = JSON.parse(localStorage.getItem("inventory")) || [];
+
+function renderInventory() {
+  const tableBody = document.querySelector("#inventoryTable tbody");
+  if (!tableBody) return; // Avoid errors before module loads
+
+  tableBody.innerHTML = "";
+
+  inventory.forEach((item, index) => {
+    const totalValue = (item.qty * item.price).toFixed(2);
+
+    tableBody.innerHTML += `
+      <tr>
+        <td>${item.name}</td>
+        <td>${item.qty}</td>
+        <td>${item.price}</td>
+        <td>${totalValue}</td>
+        <td>${item.notes}</td>
+        <td><button class="delete-btn" onclick="deleteInventory(${index})">X</button></td>
+      </tr>
+    `;
+  });
+
+  localStorage.setItem("inventory", JSON.stringify(inventory));
+}
+
+document.addEventListener("submit", function(e) {
+  if (e.target && e.target.id === "inventoryForm") {
+    e.preventDefault();
+
+    const item = {
+      name: document.querySelector("#invName").value,
+      qty: Number(document.querySelector("#invQty").value),
+      price: Number(document.querySelector("#invPrice").value),
+      notes: document.querySelector("#invNotes").value || ""
+    };
+
+    inventory.push(item);
+    renderInventory();
+    e.target.reset();
+  }
+});
+
+function deleteInventory(index) {
+  inventory.splice(index, 1);
+  renderInventory();
+}
+
+renderInventory();
